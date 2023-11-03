@@ -13,7 +13,7 @@ public record Orbit
     public double OrbitalPeriod { get; init; }
     public double RotationPeriod { get; init; }
 
-    public static Orbit(double orbitalRadius, double orbitalPeriod, double rotationPeriod)
+    public static Orbit Create(double orbitalRadius, double orbitalPeriod, double rotationPeriod)
     {
         if (orbitalRadius < 0 || orbitalPeriod < 0 || rotationPeriod < 0)
         {
