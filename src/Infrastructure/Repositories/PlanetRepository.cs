@@ -14,5 +14,7 @@ public class PlanetRepository : IPlanetRepository
 
     public async Task Add(Planet planet) => await _context.Planets.AddAsync(planet);
 
-    public Task<Planet?> GetByIdAsync(PlanetId id) => _context.Planets.SingleOrDefaultAsync(planet => planet.Id.Equals(id));
+    public async Task<List<Planet>> GetAll() => await _context.Planets.ToListAsync();
+
+    public async Task<Planet?> GetByIdAsync(PlanetId id) => await _context.Planets.SingleOrDefaultAsync(planet => planet.Id.Equals(id));
 }

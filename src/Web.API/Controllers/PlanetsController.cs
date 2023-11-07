@@ -1,4 +1,5 @@
 using Application.Planets.Create;
+using Application.Planets.GetAll;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -22,5 +23,15 @@ public class PlanetsController : APIController
             planet => Ok(),
             errors => Problem(errors)
         );
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> GetAll()
+    {
+        var planetsResult = await _mediator.Send(new GetAllPlanetsQuery());
+        return planetsResult.Match(
+            planets => Ok(planets),
+            errors => Problem(errors)
+            );
     }
 }
