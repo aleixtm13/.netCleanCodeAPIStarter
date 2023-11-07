@@ -19,27 +19,19 @@ internal sealed class CreatePlanetCommandHandler : IRequestHandler<CreatePlanetC
 
     public async Task<ErrorOr<Unit>> Handle(CreatePlanetCommand command, CancellationToken cancellationToken)
     {
-        try
-        {
-            if (Orbit.Create(command.OrbitalRadius, command.OrbitalPeriod, command.RotationPeriod) is not Orbit orbit)
-            {
-                return Error.Validation("Planet.Orbit", "Planet Orbit Has no valid format");
-            }
 
-            var planet = new Planet(
-                new PlanetId(Guid.NewGuid()),
-                command.Name,
-                orbit);
-
-            await _planetRepository.Add(planet);
-            await _unitOfWork.SaveChangesAsync(cancellationToken);
-            return Unit.Value;
-        }
-        catch (Exception exception)
+        if (Orbit.Create(command.OrbitalRadius, command.OrbitalPeriod, command.RotationPeriod) is not Orbit orbit)
         {
-            return Error.Failure("CreatePlanet", exception.Message);
+            return Error.Validation("Planet.Orbit", "Planet Orbit Has no valid format");
         }
 
+        var planet = new Planet(
+            new PlanetId(Guid.NewGuid()),
+            command.Name,
+            orbit);
 
+        await _planetRepository.Add(planet);
+        await _unitOfWork.SaveChangesAsync(cancellationToken);
+        return Unit.Value;
     }
 }
