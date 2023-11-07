@@ -17,9 +17,9 @@ public class PlanetConfiguration : IEntityTypeConfiguration<Planet>
 
         builder.OwnsOne(p => p.Orbit, orbitBuilder =>
         {
-            orbitBuilder.Property(o => o.OrbitalPeriod).IsRequired(false);
-            orbitBuilder.Property(o => o.OrbitalRadius).IsRequired(false);
-            orbitBuilder.Property(o => o.RotationPeriod).IsRequired(false);
+            orbitBuilder.Property(o => o.OrbitalPeriod).IsRequired(true).HasDefaultValue(0);
+            orbitBuilder.Property(o => o.OrbitalRadius).IsRequired(true).HasDefaultValue(0);
+            orbitBuilder.Property(o => o.RotationPeriod).IsRequired(true).HasDefaultValue(0);
         });
     }
 }

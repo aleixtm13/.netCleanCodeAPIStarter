@@ -10,7 +10,7 @@ namespace Infrastructure.Persistance;
 public class ApplicationDbContext : DbContext, IApplicationDbContext, IUnitOfWork
 {
     private readonly IPublisher _publisher;
-    public DbSet<Planet> Planets { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    public DbSet<Planet> Planets { get; set; }
 
     public ApplicationDbContext(DbContextOptions options, IPublisher publisher) : base(options)
     {

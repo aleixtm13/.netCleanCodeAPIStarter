@@ -1,3 +1,4 @@
+using ErrorOr;
 using MediatR;
 
 namespace Application.Planets.Create;
@@ -7,5 +8,5 @@ public record CreatePlanetCommand(
     double OrbitalRadius,
     double OrbitalPeriod,
     double RotationPeriod
-) : IRequest<Unit>;
+) : IRequest<ErrorOr<Unit>>;
 
