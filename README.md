@@ -1,4 +1,4 @@
-# Solar Sytem API Readme
+# Clean code Template Readme
 
 ## Table of Contents
 
